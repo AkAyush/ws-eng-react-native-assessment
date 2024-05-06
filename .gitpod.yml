@@ -1,0 +1,25 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+    - name: App
+      init: |
+          npm ci
+          gp env "EXPO_PACKAGER_PROXY_URL=$(gp url 8081)"
+          eval $(gp env -e)
+      command: npm start -- --go
+
+ports:
+    - port: 8081
+      visibility: public
+      onOpen: ignore
+    - port: 6080
+      visibility: public
+      onOpen: ignore
+
+vscode:
+    extensions:
+        - esbenp.prettier-vscode
+        - dbaeumer.vscode-eslint
+        - caponetto.vscode-diff-viewer
+        - eamodio.gitlens
